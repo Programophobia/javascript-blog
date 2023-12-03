@@ -182,20 +182,18 @@ addClickListenersToTags();
 console.log(generateTitleLinks);
 
 
-
 function generateAuthors() {
- 
   const authors = document.querySelectorAll(optArticleSelector);
   for (let author of authors) {
     const authorList = author.querySelector(optArticleAuthorSelector);
     console.log(authorList);
     const articleAuthor = author.getAttribute('data-author');
-    const linkHTML = '<h4><span>' + articleAuthor + '</span></h4>';
+    const linkHTML = '<a href="#author-' + articleAuthor + '"><span>' + articleAuthor + '</span></a>';
     console.log(linkHTML);
     authorList.innerHTML = linkHTML;
-  }
-  
+  } 
 }
-
 generateAuthors();
-console.log(generateAuthors);
+console.log(generateAuthors); 
+
+addClickListenersToAuthors
