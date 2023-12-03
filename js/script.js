@@ -126,7 +126,7 @@ function generateTags(){
 generateTags();
 
 function tagClickHandler(event){
-  /* prevent default action for this event */ //Why?
+  /* prevent default action for this event */ 
   event.preventDefault();
 
   /* make new constant named "clickedElement" and give it the value of "this" */
@@ -178,3 +178,11 @@ function addClickListenersToTags(){
   }
 }
 addClickListenersToTags();
+console.log(generateTitleLinks);
+
+function generateAuthors() {
+  
+  const authors = document.querySelectorAll(optArticleSelector);
+
+
+}
