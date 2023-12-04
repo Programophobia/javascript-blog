@@ -41,7 +41,8 @@ const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
-  optArticleAuthorSelector = '.post .post-author';
+  optArticleAuthorSelector = '.post .post-author',
+  optTagsListSelector = '.list.tags';
 
 function generateTitleLinks(customSelector = ''){
 
@@ -85,7 +86,10 @@ generateTitleLinks();
 
 //TAGS
 
-function generateTags(){
+function generateTags() {
+  /* [NEW] create a new variable allTags with an empty array */
+  let allTags = [];
+
   /* find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
 
@@ -98,7 +102,7 @@ function generateTags(){
 
     /* make html variable with empty string */
     let html = '';
-
+    
     /* get tags from data-tags attribute */
     const articleTags = article.getAttribute('data-tags');
     console.log(articleTags);
@@ -116,14 +120,22 @@ function generateTags(){
       console.log(linkHTML);
 
       /* add generated code to html variable */
-      //html = html + linkHTML;
-      tagList.insertAdjacentHTML('afterbegin', linkHTML);
+      html = html + linkHTML;
+      /* [NEW] check if this link is NOT already in allTags */
+      if(allTags.indexOf(linkHTML) == -1){
+        /* [NEW] add generated code to allTags array */
+        allTags.push(linkHTML);
+      }
     }
     /* insert HTML of all the links into the tags wrapper */
-    //tagList.innerHTML = html;
-
+    tagList.innerHTML = html;
     console.log(html);
   }
+  /* [NEW] find list of tags in right column */
+  const tagListRight = document.querySelector(optTagsListSelector);
+
+  /* [NEW] add html from allTags to tagList */
+  tagListRight.innerHTML = allTags.join(' ');
 }
 generateTags();
 
@@ -249,4 +261,4 @@ function addClickListenersToAuthors(){
   }
 }
 addClickListenersToAuthors();
-console.log(addClickListenersToAuthors);
+console.log('addClickListenersToAuthors');
