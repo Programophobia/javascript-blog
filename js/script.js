@@ -245,30 +245,40 @@ console.log(generateTitleLinks);
 //AUTHORS
 
 function generateAuthors() {
-  /* [NEW] create a new variable allAuthors with an empty array */
-  let allAuthors = [];
+  /* [NEW] create a new variable allAuthors with an empty object */
+  let allAuthors = {};
 
   const authors = document.querySelectorAll(optArticleSelector);
   for (let author of authors) {
-    const authorList = author.querySelector(optArticleAuthorSelector);
-    console.log(authorList);
+    const authorListRight = author.querySelector(optArticleAuthorSelector);
+    console.log(authorListRight);
     const articleAuthor = author.getAttribute('data-author');
     const linkHTML = '<a href="#author-' + articleAuthor + '"><span>' + articleAuthor + '</span><br></a>';
     console.log(linkHTML);
 
-    //NEW- no remove double input
-    if(allAuthors.indexOf(linkHTML) == -1){
-      /* [NEW] add generated code to allAuthors array */
-      allAuthors.push(linkHTML);
-
-      authorList.innerHTML = linkHTML;
+    //NEW- now remove double input + count articles
+    if(!allAuthors.hasOwnProperty(articleAuthor)){
+      /* [NEW] add articleAuthor to allAuthors object */
+      allAuthors[articleAuthor]=1;
     }
+    else{
+      allAuthors[articleAuthor]++;
+      console.log(allAuthors);
+    }
+
+    authorListRight.innerHTML = linkHTML;
+    
   } 
   /* [NEW] find list of authors in right column */
   const authorsList = document.querySelector(optAuthorsListSelector);
 
-  /* [NEW] add html from allTags to tagList */
-  authorsList.innerHTML = allAuthors.join(' ');
+  /* [NEW] add html from allAuthors to AuthorList */
+  //authorsList.innerHTML = allAuthors.join(' ');
+  let allAuthorsHTML = '';
+  for(let author in allAuthors) {
+    allAuthorsHTML += '<a href="#author-' + author + '"><span>' + author + ' (' + allAuthors[author] + ') ';
+  }
+  authorsList.innerHTML = allAuthorsHTML;
 }
 generateAuthors();
 console.log(generateAuthors); 
