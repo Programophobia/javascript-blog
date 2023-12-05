@@ -16,7 +16,10 @@ $font-text: 'Source Sans Pro', sans-serif;
 }
 
 body {
-  background: $color-light;
+  background-image: url('https://i.postimg.cc/MKDFsnLc/pexels-pixabay-66869.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
   font-family: $font-text;
   color: $color-dark;
   font-weight: 300;

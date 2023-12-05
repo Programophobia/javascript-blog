@@ -44,7 +44,8 @@ const optArticleSelector = '.post',
   optArticleAuthorSelector = '.post .post-author',
   optTagsListSelector = '.list.tags',
   optCloudClassCount = 5,
-  optCloudClassPrefix = 'tag-size-';
+  optCloudClassPrefix = 'tag-size-',
+  optAuthorsListSelector ='.list.authors';
 
 function generateTitleLinks(customSelector = ''){
 
@@ -244,15 +245,30 @@ console.log(generateTitleLinks);
 //AUTHORS
 
 function generateAuthors() {
+  /* [NEW] create a new variable allAuthors with an empty array */
+  let allAuthors = [];
+
   const authors = document.querySelectorAll(optArticleSelector);
   for (let author of authors) {
     const authorList = author.querySelector(optArticleAuthorSelector);
     console.log(authorList);
     const articleAuthor = author.getAttribute('data-author');
-    const linkHTML = '<a href="#author-' + articleAuthor + '"><span>' + articleAuthor + '</span></a>';
+    const linkHTML = '<a href="#author-' + articleAuthor + '"><span>' + articleAuthor + '</span><br></a>';
     console.log(linkHTML);
-    authorList.innerHTML = linkHTML;
+
+    //NEW- no remove double input
+    if(allAuthors.indexOf(linkHTML) == -1){
+      /* [NEW] add generated code to allAuthors array */
+      allAuthors.push(linkHTML);
+
+      authorList.innerHTML = linkHTML;
+    }
   } 
+  /* [NEW] find list of authors in right column */
+  const authorsList = document.querySelector(optAuthorsListSelector);
+
+  /* [NEW] add html from allTags to tagList */
+  authorsList.innerHTML = allAuthors.join(' ');
 }
 generateAuthors();
 console.log(generateAuthors); 
