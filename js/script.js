@@ -276,7 +276,7 @@ function generateAuthors() {
   //authorsList.innerHTML = allAuthors.join(' ');
   let allAuthorsHTML = '';
   for(let author in allAuthors) {
-    allAuthorsHTML += '<a href="#author-' + author + '"><span>' + author + ' (' + allAuthors[author] + ') ';
+    allAuthorsHTML += '<a href="#author-' + author + '"><span>' + author + ' (' + allAuthors[author] + ') ' + '</span></a><br>';
   }
   authorsList.innerHTML = allAuthorsHTML;
 }

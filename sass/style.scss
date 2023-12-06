@@ -60,11 +60,19 @@ body {
 }
 
 .sidebar, .posts {
-  background: $color-light;
+  background-color: white;
+  color: black;
   margin-right: 10px;
   padding: 40px;
-  border: 1px solid $color-dark;
+  border: 5px solid $color-dark;
   border-radius: 5px;
+}
+
+a {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+
 }
 
 /* Logo */
@@ -125,26 +133,27 @@ body {
 /*Class frequency of tags styles*/
 
 .tag-size {
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: "sacramento", cursive;
   color: #333;
   display: inline;
   cursor: zoom-in;
   text-decoration: none;
+  text-shadow: 5px 4px #ccc;
 
   &-1 {
-    font-size: 20px;
+    font-size: 28px;
   }
   &-2 {
-    font-size: 25px;
-  }
-  &-3 {
     font-size: 30px;
   }
-  &-4 {
+  &-3 {
     font-size: 35px;
   }
-  &-5 {
+  &-4 {
     font-size: 40px;
+  }
+  &-5 {
+    font-size: 45px;
   }
 }
 
