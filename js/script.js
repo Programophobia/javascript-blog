@@ -185,19 +185,25 @@ function generateTags() {
   console.log('tagsParams:', tagsParams);
 
   /*[NEW] create variable for all links HTML code*/
-  let allTagsHTML = '';
+  //let allTagsHTML = ''; 06.12.23-added to invisible for handlebar
+  const allTagsData = {tags: []};
 
   /*[NEW] START LOOP: for each tag in allTags*/
   for(let tag in allTags){
     /*[NEW] generate code of link and add it to allTagsHTML*/
     const tagLinkHTML = '<li><a href="#tag-' + tag + '" class="tag-size '+ calculateTagClass(allTags[tag], tagsParams) +'">' + tag + '</a></li>';
-    allTagsHTML += tagLinkHTML;
+    // allTagsHTML += tagLinkHTML;
+    allTagsData.tags.push({
+      tag: tag,
+      count: allTags[tag],
+      className: calculateTagClass(allTags[tag], tagsParams)
+    });
     //allTagsHTML += '<li><a href="#tag-' + tag + '">' + tag + '(' + allTags[tag] + ')</a></li>';
   } //NEW END LOOP: for each tag in allTags
 
   /* [NEW] add html from allTagsHTML to taglist*/
-  tagListRight.innerHTML = allTagsHTML;
-
+  //tagListRight.innerHTML = allTagsHTML;
+  tagListRight.innerHTML = templates.tagCloudLink(allTagsData);
   console.log(allTags);
 }
 generateTags();
