@@ -5,7 +5,19 @@ const templates = {
   articleTagLink: Handlebars.compile(document.querySelector('#template-article-tag').innerHTML),
   articleAuthor: Handlebars.compile(document.querySelector('#template-article-author').innerHTML),
   tagCloudLink: Handlebars.compile(document.querySelector('#template-article-cloud').innerHTML),
+  articleRightLink: Handlebars.compile(document.querySelector('#template-article-right').innerHTML)
 };
+
+
+const optArticleSelector = '.post',
+  optTitleSelector = '.post-title',
+  optTitleListSelector = '.titles',
+  optArticleTagsSelector = '.post-tags .list',
+  optArticleAuthorSelector = '.post .post-author',
+  optTagsListSelector = '.list.tags',
+  optCloudClassCount = 5,
+  optCloudClassPrefix = 'tag-size-',
+  optAuthorsListSelector ='.list.authors'
 
 function titleClickHandler(event){
   console.log('Link was clicked!');
@@ -43,16 +55,6 @@ function titleClickHandler(event){
 
   console.log(event);
 }
-
-const optArticleSelector = '.post',
-  optTitleSelector = '.post-title',
-  optTitleListSelector = '.titles',
-  optArticleTagsSelector = '.post-tags .list',
-  optArticleAuthorSelector = '.post .post-author',
-  optTagsListSelector = '.list.tags',
-  optCloudClassCount = 5,
-  optCloudClassPrefix = 'tag-size-',
-  optAuthorsListSelector ='.list.authors';
 
 //LINKS
 
@@ -191,7 +193,7 @@ function generateTags() {
   /*[NEW] START LOOP: for each tag in allTags*/
   for(let tag in allTags){
     /*[NEW] generate code of link and add it to allTagsHTML*/
-    const tagLinkHTML = '<li><a href="#tag-' + tag + '" class="tag-size '+ calculateTagClass(allTags[tag], tagsParams) +'">' + tag + '</a></li>';
+    //const tagLinkHTML = '<li><a href="#tag-' + tag + '" class="tag-size '+ calculateTagClass(allTags[tag], tagsParams) +'">' + tag + '</a></li>';
     // allTagsHTML += tagLinkHTML;
     allTagsData.tags.push({
       tag: tag,
@@ -297,11 +299,19 @@ function generateAuthors() {
 
   /* [NEW] add html from allAuthors to AuthorList */
   //authorsList.innerHTML = allAuthors.join(' ');
-  let allAuthorsHTML = '';
+
+  //let allAuthorsHTML = '';
+  const allAuthorsData = {authors:[]};
+
   for(let author in allAuthors) {
-    allAuthorsHTML += `<a href="#author-${author}"><span>${author} (${allAuthors[author]}) </span></a><br>`;
+    //allAuthorsHTML += `<a href="#author-${author}"><span>${author} (${allAuthors[author]}) </span></a><br>`;
+    allAuthorsData.authors.push({
+      author: author,
+      count: allAuthors[author],
+    });
   }
-  authorsList.innerHTML = allAuthorsHTML;
+  //authorsList.innerHTML = allAuthorsHTML;
+  authorsList.innerHTML=templates.articleRightLink(allAuthorsData);
 }
 generateAuthors();
 console.log(generateAuthors); 
