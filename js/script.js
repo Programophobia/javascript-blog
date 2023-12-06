@@ -1,5 +1,12 @@
 'use strict';
 
+const templates = {
+  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+  articleTagLink: Handlebars.compile(document.querySelector('#template-article-tag').innerHTML),
+  articleAuthor: Handlebars.compile(document.querySelector('#template-article-author').innerHTML),
+  tagCloudLink: Handlebars.compile(document.querySelector('#template-article-cloud').innerHTML),
+};
+
 function titleClickHandler(event){
   console.log('Link was clicked!');
 
@@ -47,6 +54,8 @@ const optArticleSelector = '.post',
   optCloudClassPrefix = 'tag-size-',
   optAuthorsListSelector ='.list.authors';
 
+//LINKS
+
 function generateTitleLinks(customSelector = ''){
 
   /* remove contents of titleList */
@@ -68,8 +77,11 @@ function generateTitleLinks(customSelector = ''){
     /* get the title from the title element */
     const articleTitle = article.querySelector(optTitleSelector).innerHTML; 
     /* create HTML of the link */
-    const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+    //const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';    ANKA-wywal jak skończysz
+    const linkHTMLData = {id: articleId, title: articleTitle};
+    const linkHTML = templates.articleLink(linkHTMLData);
     console.log(linkHTML);
+
     /* insert link into titleList */
     html = html + linkHTML;
     
@@ -141,9 +153,12 @@ function generateTags() {
       console.log(tag);
 
       /* generate HTML of the link */
-      const linkHTML = '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li><br>';
+      //const linkHTML = '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li><br>';
+    
+      const linkHTMLData = {id: tag, title: tag};
+      const linkHTML = templates.articleTagLink(linkHTMLData);
       console.log(linkHTML);
-
+ 
       /* add generated code to html variable */
       html = html + linkHTML;
 
@@ -253,7 +268,9 @@ function generateAuthors() {
     const authorListRight = author.querySelector(optArticleAuthorSelector);
     console.log(authorListRight);
     const articleAuthor = author.getAttribute('data-author');
-    const linkHTML = '<a href="#author-' + articleAuthor + '"><span>' + articleAuthor + '</span><br></a>';
+    //const linkHTML = '<a href="#author-' + articleAuthor + '"><span>' + articleAuthor + '</span><br></a>';delate anka
+    const linkHTMLData = {id: articleAuthor, title: articleAuthor};
+    const linkHTML = templates.articleAuthor(linkHTMLData);
     console.log(linkHTML);
 
     //NEW- now remove double input + count articles
@@ -276,7 +293,7 @@ function generateAuthors() {
   //authorsList.innerHTML = allAuthors.join(' ');
   let allAuthorsHTML = '';
   for(let author in allAuthors) {
-    allAuthorsHTML += '<a href="#author-' + author + '"><span>' + author + ' (' + allAuthors[author] + ') ' + '</span></a><br>';
+    allAuthorsHTML += `<a href="#author-${author}"><span>${author} (${allAuthors[author]}) </span></a><br>`;
   }
   authorsList.innerHTML = allAuthorsHTML;
 }
