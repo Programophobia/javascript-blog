@@ -129,16 +129,25 @@ a {
     margin: 0 10px 0 0;
   }
 }
-
+.list li {
+  border-bottom: solid black;
+}
 /*Class frequency of tags styles*/
+
+.side-left{
+  background: fixed;
+  font-size: 30px;
+  text-align: center;
+}
 
 .tag-size {
   font-family: "sacramento", cursive;
   color: #333;
   display: inline;
-  cursor: zoom-in;
+  cursor:grab;
   text-decoration: none;
   text-shadow: 5px 4px #ccc;
+  text-transform: uppercase;
 
   &-1 {
     font-size: 28px;
@@ -157,6 +166,10 @@ a {
   }
 }
 
-
+.list.tags li:hover {
+  transition: all 1s;
+  transform: rotate3d(1, 1, 1, 360deg);
+  border-bottom: none;
+}
 
 
